@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:language_learning_app/components/List_item.dart';
-import 'package:language_learning_app/models/Item_models.dart';
+import 'package:language_learning_app/components/item_tile.dart';
+import 'package:language_learning_app/core/zen_pattern_background.dart';
+import 'package:language_learning_app/models/item_model.dart';
 
-class FamilyMembersPage extends StatelessWidget {
-  const FamilyMembersPage({super.key});
+class FamilyMembersScreen extends StatelessWidget {
+  const FamilyMembersScreen({
+    super.key,
+    required this.categoryHeroTag,
+    required this.categoryIcon,
+  });
+  final String categoryHeroTag;
+  final IconData categoryIcon;
   final List<ItemModel> familyMembersList = const [
     ItemModel(
         sound: "sounds/family_members/father.wav",
@@ -50,20 +57,34 @@ class FamilyMembersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Color(0xff46322B),
-        title: Text(
-          "Family Members",
-          style: TextStyle(
-            color: Colors.white,
-          ),
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Hero(
+              tag: categoryHeroTag,
+              child: Icon(
+                categoryIcon,
+                color: const Color(0xFF43A047),
+              ),
+            ),
+            const SizedBox(width: 8),
+            const Text('Family Members'),
+          ],
         ),
       ),
-      body: ListView.builder(
-        itemCount: familyMembersList.length,
-        itemBuilder: (context, index) {
-          return Item(color: Colors.green, item: familyMembersList[index]);
-        },
+      body: SafeArea(
+        child: ZenPatternBackground(
+          child: ListView.builder(
+            itemCount: familyMembersList.length,
+            itemBuilder: (context, index) {
+              return ItemTile(
+                color: const Color(0xFF43A047),
+                item: familyMembersList[index],
+                animationDelay: Duration(milliseconds: 100 * index),
+              );
+            },
+          ),
+        ),
       ),
     );
   }

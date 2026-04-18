@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:language_learning_app/screens/home_page.dart';
+import 'package:language_learning_app/core/theme.dart';
+import 'package:language_learning_app/screens/home_screen.dart';
 
 void main() {
-  runApp(TokuApp());
+  runApp(const TokuApp());
 }
 
 class TokuApp extends StatelessWidget {
@@ -10,6 +11,10 @@ class TokuApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: HomePage() );
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.lightTheme,
+      home: const HomeScreen(),
+    );
   }
 }

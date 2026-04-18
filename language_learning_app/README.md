@@ -1,77 +1,36 @@
-# 🇯🇵 Japanese Language Learning App (Flutter)
+# 🇯🇵 Toku - Learning Japanese App
 
-An interactive Flutter application designed to help beginners learn basic **Japanese vocabulary** through images and pronunciation sounds.
-
----
-
-## 📱 Features
-
-* 🖼️ Visual learning using images
-* 🔊 Audio pronunciation for each word
-* 📚 Organized into categories:
-
-  * 🔢 Numbers
-  * 👨‍👩‍👧 Family Members
-  * 🎨 Colors
-* ♻️ Reusable UI components for clean and maintainable code
-* ⚡ Simple and smooth user experience
+A polished, high-performance Flutter application designed to teach Japanese vocabulary through an immersive audio-visual experience.
 
 ---
 
-## 🛠️ Technologies Used
-
-* Flutter (Dart)
-* audioplayers package
-
----
+## ✨ Features
+* **Modern UI/UX:** Clean design with custom background patterns and haptic feedback.
+* **Animated Lists:** Smooth staggered animations for item entry.
+* **Audio-Visual Learning:** Native pronunciations paired with descriptive images.
+* **Optimized Architecture:** Centralized services for audio management and UI patterns.
 
 ## 📂 Project Structure
-
+```text
 lib/
-├── models/        # Data models (ItemModel)
-├── components/    # Reusable widgets (Item, Category)
-├── pages/         # App screens (Numbers, Family, Colors)
+├── core/          # Business logic, services (Audio), and global themes.
+├── models/        # Data structure (ItemModel).
+├── components/    # Reusable UI widgets (ItemTile, CategoryCard).
+├── screens/       # Main app screens (Home, Numbers, Colors, etc.).
 
----
+## 🛠️ Tech Stack
+Framework: Flutter (Dart)
 
-## 📦 Assets
+Audio Engine: audioplayers package.
 
-* All images and audio files are organized inside the `assets/` folder
-* Audio files are used to improve pronunciation and listening skills
+Navigation: Clean & scalable Material Page Routing.
 
----
+## 🚀 Key Improvements
+Refactored Codebase: All files follow official Flutter naming conventions.
 
-## 💡 Key Concept
+Asset Management: Fixed and synchronized audio asset paths for seamless playback.
 
-The app uses a single reusable model (`ItemModel`) across all categories to:
+Performance: Implemented AudioService to prevent memory leaks and handle assets efficiently.
 
-* Reduce code duplication
-* Improve maintainability
-* Make the app scalable for future features
-
----
-
-## 🚀 Current Status
-
-* ✅ Core features completed
-* 🔄 Planned improvements:
-
-  * Enhance UI/UX design
-  * Improve navigation
-  * Add more categories (phrases, animals, food)
-
----
-
-## 🎯 Goal
-
-This project was built to:
-
-* Help beginners learn Japanese vocabulary
-* Improve listening skills
-* Provide a simple and interactive learning experience
-
----
-
-## 👨‍💻 Author
-
+👨‍💻 Author
 Developed by Saad Saif

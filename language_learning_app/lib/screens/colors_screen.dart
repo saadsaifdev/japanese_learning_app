@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:language_learning_app/components/List_item.dart';
-import 'package:language_learning_app/models/Item_models.dart';
+import 'package:language_learning_app/components/item_tile.dart';
+import 'package:language_learning_app/core/zen_pattern_background.dart';
+import 'package:language_learning_app/models/item_model.dart';
 
-class ColorsPage extends StatelessWidget {
-  const ColorsPage({super.key});
-  final List<ItemModel> ColoesList = const [
+class ColorsScreen extends StatelessWidget {
+  const ColorsScreen({
+    super.key,
+    required this.categoryHeroTag,
+    required this.categoryIcon,
+  });
+  final String categoryHeroTag;
+  final IconData categoryIcon;
+  final List<ItemModel> colorsList = const [
     ItemModel(
         sound: "sounds/colors/black.wav",
         img: "assets/images/colors/color_black.png",
@@ -45,20 +52,34 @@ class ColorsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Color(0xff46322B),
-        title: Text(
-          "Colors",
-          style: TextStyle(
-            color: Colors.white,
-          ),
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Hero(
+              tag: categoryHeroTag,
+              child: Icon(
+                categoryIcon,
+                color: const Color(0xFF8E24AA),
+              ),
+            ),
+            const SizedBox(width: 8),
+            const Text('Colors'),
+          ],
         ),
       ),
-      body: ListView.builder(
-        itemCount: ColoesList.length,
-        itemBuilder: (context, index) {
-          return Item(color: Colors.purple, item: ColoesList[index]);
-        },
+      body: SafeArea(
+        child: ZenPatternBackground(
+          child: ListView.builder(
+            itemCount: colorsList.length,
+            itemBuilder: (context, index) {
+              return ItemTile(
+                color: const Color(0xFF8E24AA),
+                item: colorsList[index],
+                animationDelay: Duration(milliseconds: 100 * index),
+              );
+            },
+          ),
+        ),
       ),
     );
   }

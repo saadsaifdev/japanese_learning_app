@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:language_learning_app/components/List_item.dart';
-import 'package:language_learning_app/models/Item_models.dart';
+import 'package:language_learning_app/components/item_tile.dart';
+import 'package:language_learning_app/core/zen_pattern_background.dart';
+import 'package:language_learning_app/models/item_model.dart';
 
-class Phrasespage extends StatelessWidget {
-  const Phrasespage({super.key});
+class PhrasesScreen extends StatelessWidget {
+  const PhrasesScreen({
+    super.key,
+    required this.categoryHeroTag,
+    required this.categoryIcon,
+  });
+  final String categoryHeroTag;
+  final IconData categoryIcon;
 
   final List<ItemModel> phrasesList = const [
     ItemModel(
@@ -32,7 +39,7 @@ class Phrasespage extends StatelessWidget {
       enname: "What is your name?",
     ),
     ItemModel(
-      sound: "sounds/phrases/i_love_programming.wav",
+      sound: "sounds/phrases/i_love_anime.wav",
       jpname: "Watashi wa anime ga daisukidesu",
       enname: "I love anime",
     ),
@@ -52,22 +59,35 @@ class Phrasespage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff46322B),
-        centerTitle: true,
-        title: Text(
-          "Phrases",
-          style: TextStyle(color: Colors.white),
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Hero(
+              tag: categoryHeroTag,
+              child: Icon(
+                categoryIcon,
+                color: const Color(0xFF00838F),
+              ),
+            ),
+            const SizedBox(width: 8),
+            const Text('Phrases'),
+          ],
         ),
       ),
-      body: ListView.builder(
-        itemCount: phrasesList.length,
-        itemBuilder: (context, index) {
-          return Item(
-            item: phrasesList[index],
-            color: const Color(0xff50ADC7),
-            showImage: false,
-          );
-        },
+      body: SafeArea(
+        child: ZenPatternBackground(
+          child: ListView.builder(
+            itemCount: phrasesList.length,
+            itemBuilder: (context, index) {
+              return ItemTile(
+                item: phrasesList[index],
+                color: const Color(0xFF00838F),
+                showImage: false,
+                animationDelay: Duration(milliseconds: 100 * index),
+              );
+            },
+          ),
+        ),
       ),
     );
   }

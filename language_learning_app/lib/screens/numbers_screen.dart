@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:language_learning_app/components/List_item.dart';
-import 'package:language_learning_app/models/Item_models.dart';
+import 'package:language_learning_app/components/item_tile.dart';
+import 'package:language_learning_app/core/zen_pattern_background.dart';
+import 'package:language_learning_app/models/item_model.dart';
 
-class NumbersPage extends StatelessWidget {
-  const NumbersPage({super.key});
+class NumbersScreen extends StatelessWidget {
+  const NumbersScreen({
+    super.key,
+    required this.categoryHeroTag,
+    required this.categoryIcon,
+  });
+  final String categoryHeroTag;
+  final IconData categoryIcon;
   final List<ItemModel> numbersList = const [
     ItemModel(
         sound: "sounds/numbers/number_one_sound.mp3",
@@ -60,22 +67,34 @@ class NumbersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Color(0xff46322B),
-        title: Text(
-          "Numbers",
-          style: TextStyle(
-            color: Colors.white,
-          ),
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Hero(
+              tag: categoryHeroTag,
+              child: Icon(
+                categoryIcon,
+                color: const Color(0xFFFFB300),
+              ),
+            ),
+            const SizedBox(width: 8),
+            const Text('Numbers'),
+          ],
         ),
       ),
-      body: ListView.builder(
-        itemCount: numbersList.length,
-        itemBuilder: (context, index) {
-          return Item(
-            color: Colors.orange,
-            item: numbersList[index]);
-        },
+      body: SafeArea(
+        child: ZenPatternBackground(
+          child: ListView.builder(
+            itemCount: numbersList.length,
+            itemBuilder: (context, index) {
+              return ItemTile(
+                color: const Color(0xFFFFC107),
+                item: numbersList[index],
+                animationDelay: Duration(milliseconds: 100 * index),
+              );
+            },
+          ),
+        ),
       ),
     );
   }
